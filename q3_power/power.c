@@ -19,7 +19,10 @@
  */
 float calculate_power(float voltage, float current) {
     // TODO: Implement power calculation
-    return 0.0f;  // Placeholder
+    float power = voltage * current;
+    printf("Power consumption: %.3f W\n", power);
+    return power;  // Placeholder
+
 }
 
 /**
@@ -29,21 +32,41 @@ float calculate_power(float voltage, float current) {
  */
 int is_valid_power(float power) {
     // TODO: Implement power validation logic
-    return 0;  // Placeholder
+    if (power <= 5.0f) {
+	    return 1;
+    } else {
+	    return 0; //not valid
+    }  // Placeholder
 }
 
 #ifndef UNIT_TEST
 int main(void) {
-    float voltage, current, power;
+    float voltage = 0.0f, current = 0.0f, power;
     float max_power = 5.0f;
 
     printf("Power Calculator for Chip Validation\n");
     printf("Maximum allowed power: %.1fW\n", max_power);
 
+    printf("Enter voltage (V): ");
+        if (scanf("%f", &voltage) != 1) {
+           printf("Invalid input for voltage.\n");
+           return 1;
+    }
+    printf("Enter current (A): ");
+   	 if (scanf("%f", &current) != 1) {
+            printf("Invalid input for current.\n");
+            return 1;
+    }
     // TODO: Read voltage and current, calculate power, and validate
     // Read voltage and current, calculate power, and validate
+    power = calculate_power(voltage, current);
 
+    if (is_valid_power(power)) {
+	    printf ("Power consumption %.3f W is within the safe limit.\n", power);
+    } else {
+	   printf ("Power consumption %.3f W exceeds the safe limit.\n", power); 
     return 0;
+    }
 }
 #endif
 
